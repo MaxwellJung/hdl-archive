@@ -190,6 +190,8 @@
     "https://bcr.bazel.build/modules/rules_swift/3.1.2/source.json": "e85761f3098a6faf40b8187695e3de6d97944e98abd0d8ce579cb2daf6319a66",
     "https://bcr.bazel.build/modules/rules_venv/0.15.0/MODULE.bazel": "0eff85b23205d0f6928e3438038165e704d4123973aefa94ff03c7e93be770a7",
     "https://bcr.bazel.build/modules/rules_venv/0.15.0/source.json": "e50c3d977ddbbfc0f623cd1892403b56b276f5c1dbfda1189e22502aefc90132",
+    "https://bcr.bazel.build/modules/rules_verilator/1.0.0/MODULE.bazel": "cae8af78d959f4fa97130eca26a09c6b6c7de1cbd4cf164cb502653f22213b0d",
+    "https://bcr.bazel.build/modules/rules_verilator/1.0.0/source.json": "141a82fd14a5d5c26b83c7e836a1c3bcf4c018d6a181f38e58a723d45bf9373f",
     "https://bcr.bazel.build/modules/rules_verilog/1.1.0/MODULE.bazel": "7b1d2d0321566572b61b76a4b4c263ce4da27ee0437552e1c70cff838101db57",
     "https://bcr.bazel.build/modules/rules_verilog/1.1.1/MODULE.bazel": "adcccf08f92e16936d6aa2e872f31a79e80712333be604de750d4b109fae1519",
     "https://bcr.bazel.build/modules/rules_verilog/1.1.1/source.json": "32a02fe6f97e1a233cff48e0eae70243e2e25d4c57fc684f933e06ef67440d8b",

@@ -1,0 +1,18 @@
+load("@rules_verilog//verilog:defs.bzl", "verilog_library")
+
+verilog_library(
+    name = "sim_lib_sv",
+    srcs = glob([
+        "*.sv",
+    ]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "sim_lib_cpp",
+    srcs = glob([
+        "*.cpp",
+        "*.cc",
+    ]),
+    visibility = ["//visibility:public"],
+)

@@ -3,7 +3,7 @@ load("@rules_verilator//verilator:defs.bzl", "verilator_cc_library")
 load("@rules_cc//cc:cc_test.bzl", "cc_test")
 
 verilog_library(
-    name = "counter",
+    name = "fixed_delay",
     srcs = glob([
         "src/*.sv",
         "sim/*.sv",
@@ -14,9 +14,9 @@ verilog_library(
 )
 
 verilator_cc_library(
-    name = "counter_tb_verilated_main",
-    module = ":counter",
-    module_top = "counter_tb",
+    name = "fixed_delay_tb_verilated_main",
+    module = ":fixed_delay",
+    module_top = "fixed_delay_tb",
     timing = True,
     trace = True,
     vopts = [
@@ -31,6 +31,6 @@ cc_test(
         "//sim_lib:sim_lib_cpp",
     ],
     deps = [
-        ":counter_tb_verilated_main", 
+        ":fixed_delay_tb_verilated_main", 
     ],
 )

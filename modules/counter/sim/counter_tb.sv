@@ -1,68 +1,67 @@
 `timescale 1ns / 1ps
 
 // Import the C library function
-import "DPI-C" function string sv_getenv(input string env_name);
+import sim_lib_pkg::output_dir;
 
 module counter_tb;
-    localparam int NumBits = 8;
-    localparam int ClkPeriod = 10; // 100 MHz clock
+  localparam int NumBits = 8;
+  localparam int ClkPeriod = 10; // 100 MHz clock
 
-    logic clk;
-    logic rst;
-    logic en;
-    wire [NumBits-1:0] count;
+  logic clk;
+  logic rst;
+  logic en;
+  wire [NumBits-1:0] count;
 
-    counter #(
-        .CountBits(NumBits)
-    ) counter_inst (
-        .clk_in (clk),
-        .rst_in (rst),
-        .en_in  (en),
-        .count_out (count)
-    );
+  counter #(
+    .NumBits (NumBits)
+  ) counter_inst (
+    .clk_in (clk),
+    .rst_in (rst),
+    .en_in  (en),
+    .count_out (count)
+  );
 
-    initial clk = 0;
-    always #(ClkPeriod / 2.0)
-        clk = ~clk;
+  initial clk = 0;
+  always #(ClkPeriod / 2.0)
+    clk = ~clk;
 
-    initial begin
-        string output_dir = sv_getenv("TEST_UNDECLARED_OUTPUTS_DIR");
-        $dumpfile({output_dir, "/counter_tb.vcd"});
-        $dumpvars(0, counter_tb);
-    end
+  initial begin
+    $dumpfile({output_dir, "/counter_tb.vcd"});
+    $dumpvars(0, counter_tb);
+  end
 
-    initial begin
-        // pause counter
-        en = 0;
+  initial begin
+    // pause counter
+    en = 0;
 
-        // hold rst for 10 clock cycles
-        rst = 1;
-        repeat (10) @(posedge clk);
-        rst = 0;
+    // hold rst for 10 clock cycles
+    rst = 1;
+    repeat (10) @(posedge clk);
+    rst = 0;
 
 
-        // start counter for 50 ns
-        repeat (10) @(posedge clk);
-        en = 1;
-        repeat (5) @(posedge clk);
-        en = 0;
+    // start counter for 50 ns
+    repeat (10) @(posedge clk);
+    en = 1;
+    repeat (5) @(posedge clk);
+    en = 0;
 
-        assert (count != 0)
-            else $error("Counter should not be zero after rst is deasserted");
+    assert (count != 0)
+      else $error("Counter should not be zero after rst is deasserted");
 
-        // resume counter for 50 ns
-        repeat (10) @(posedge clk);
-        en = 1;
-        repeat (5) @(posedge clk);
-        en = 0;
+    // resume counter for 50 ns
+    repeat (10) @(posedge clk);
+    en = 1;
+    repeat (5) @(posedge clk);
+    en = 0;
 
-        // hold rst for 50 ns
-        rst = 1;
-        repeat (5) @(posedge clk);
-        rst = 0;
+    // hold rst for 50 ns
+    rst = 1;
+    repeat (5) @(posedge clk);
+    rst = 0;
 
-        repeat (20) @(posedge clk);
-        $finish;
-    end
+    repeat (20) @(posedge clk);
+    $finish;
+  end
 
 endmodule

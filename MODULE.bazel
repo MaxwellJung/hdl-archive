@@ -5,7 +5,7 @@ module(
 
 bazel_dep(name = "rules_verilog", version = "1.1.1")
 
-bazel_dep(name = "rules_verilator", version = "0.3.3")
+bazel_dep(name = "rules_verilator", version = "1.0.0")
 # Uncomment below to use the forked version of rules_verilator.
 # git_override(
 #     module_name = "rules_verilator",
@@ -13,10 +13,10 @@ bazel_dep(name = "rules_verilator", version = "0.3.3")
 #     remote = "https://github.com/MaxwellJung/rules_verilator.git",
 # )
 # Uncomment below to use the local version of rules_verilator.
-local_path_override(
-    module_name = "rules_verilator",
-    path = "../rules_verilator",
-)
+# local_path_override(
+#     module_name = "rules_verilator",
+#     path = "../rules_verilator",
+# )
 
 register_toolchains(
   "@rules_verilator//verilator:verilator_toolchain",
