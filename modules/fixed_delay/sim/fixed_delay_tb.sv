@@ -1,6 +1,5 @@
 `timescale 1ns / 1ps
 
-// Import the C library function
 import sim_lib_pkg::output_dir;
 
 module fixed_delay_tb;
@@ -62,5 +61,13 @@ module fixed_delay_tb;
     repeat(20) @(posedge clk);
     $finish;
   end
+
+  // Below concurrent assertion is unsupported by verilator as of 2026-06,
+  // but should work in other simulators.
+  // assert property (
+  //   @(posedge clk) disable iff (rst)
+  //   en |->
+  //     ##Delay data_out == $past(data_in, Delay)
+  // ) else $error("data_out should be equal to data_in delayed by %0d cycles", Delay);
 
 endmodule
