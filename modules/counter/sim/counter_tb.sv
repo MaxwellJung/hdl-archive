@@ -15,10 +15,10 @@ module counter_tb;
   counter #(
     .NumBits (NumBits)
   ) counter_inst (
-    .clk_in (clk),
-    .rst_in (rst),
-    .en_in  (en),
-    .count_out (count)
+    .clk_i (clk),
+    .rst_i (rst),
+    .en_i  (en),
+    .count_o (count)
   );
 
   initial clk = 0;

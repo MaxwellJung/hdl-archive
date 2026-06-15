@@ -12,19 +12,19 @@ module fixed_delay_tb;
   logic rst;
   logic en;
 
-  logic [DWidth-1:0] data_in;
-  logic [DWidth-1:0] data_out;
+  logic [DWidth-1:0] data_i;
+  logic [DWidth-1:0] data_o;
 
   fixed_delay #(
     .Delay  (Delay),
     .DWidth (DWidth)
   ) uut (
-    .clk_in (clk),
-    .rst_in (rst),
-    .en_in  (en),
+    .clk_i (clk),
+    .rst_i (rst),
+    .en_i  (en),
 
-    .data_in (data_in),
-    .data_out (data_out)
+    .data_i (data_i),
+    .data_o (data_o)
   );
 
   initial clk = '0;
@@ -34,9 +34,9 @@ module fixed_delay_tb;
 
   always @(posedge clk) begin
     if (rst) begin
-      data_in <= '0;
+      data_i <= '0;
     end else begin
-      data_in <= $urandom;
+      data_i <= $urandom;
     end
   end
 
@@ -67,7 +67,7 @@ module fixed_delay_tb;
   // assert property (
   //   @(posedge clk) disable iff (rst)
   //   en |->
-  //     ##Delay data_out == $past(data_in, Delay)
-  // ) else $error("data_out should be equal to data_in delayed by %0d cycles", Delay);
+  //     ##Delay data_o == $past(data_i, Delay)
+  // ) else $error("data_o should be equal to data_i delayed by %0d cycles", Delay);
 
 endmodule

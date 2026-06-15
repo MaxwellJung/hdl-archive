@@ -4,19 +4,18 @@
 module counter #(
   parameter int NumBits = 8
 ) (
-  input wire clk_in,
-  input wire rst_in,
+  input wire clk_i,
+  input wire rst_i,
+  input wire en_i,
 
-  input wire en_in,
-
-  output logic [NumBits-1:0] count_out
+  output logic [NumBits-1:0] count_o
 );
 
-  always_ff @(posedge clk_in) begin
-    if (rst_in) begin
-      count_out <= 0;
-    end else if (en_in) begin
-      count_out <= count_out + 1;
+  always_ff @(posedge clk_i) begin
+    if (rst_i) begin
+      count_o <= 0;
+    end else if (en_i) begin
+      count_o <= count_o + 1;
     end
   end
 
