@@ -30,7 +30,7 @@ module counter_tb;
     $dumpvars(0, counter_tb);
   end
 
-  initial begin
+  always begin
     // pause counter
     en = 0;
 
