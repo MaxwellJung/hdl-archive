@@ -1,0 +1,22 @@
+load("@rules_verilog//verilog:defs.bzl", "verilog_library")
+load("@rules_vivado//vivado:defs.bzl", "vivado_flow")
+
+verilog_library(
+  name = "led_top",
+  srcs = [
+    "led_top.sv",
+  ],
+  data = [
+    "Nexys-A7-100T.xdc",
+  ],
+  deps = [
+    "//rtl/counter:counter",
+  ]
+)
+
+vivado_flow(
+  name = "led_top_vivado",
+  module = ":led_top",
+  module_top = "led_top",
+  part_number = "xc7a100tcsg324-1",
+)

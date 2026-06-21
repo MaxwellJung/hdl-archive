@@ -2,7 +2,9 @@
 `default_nettype none
 
 module counter #(
-  parameter int NumBits = 8
+  parameter int InitialCount = 0,
+  parameter int MaxCount = (1 << 32) - 1,
+  localparam int NumBits = $clog2(MaxCount + 1)
 ) (
   input wire clk_i,
   input wire rst_i,
@@ -13,9 +15,9 @@ module counter #(
 
   always_ff @(posedge clk_i) begin
     if (rst_i) begin
-      count_o <= 0;
+      count_o <= InitialCount;
     end else if (en_i) begin
-      count_o <= count_o + 1;
+      count_o <= (count_o == MaxCount) ? InitialCount : count_o + 1;
     end
   end
 

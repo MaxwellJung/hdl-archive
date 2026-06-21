@@ -4,16 +4,18 @@
 import sim_lib_pkg::output_dir;
 
 module counter_tb;
-  localparam int NumBits = 8;
+  localparam int InitialCount = 0;
+  localparam int MaxCount = 2**16 - 1;
   localparam int ClkPeriod = 10; // 100 MHz clock
 
   logic clk;
   logic rst;
   logic en;
-  wire [NumBits-1:0] count;
+  wire [$clog2(MaxCount + 1)-1:0] count;
 
   counter #(
-    .NumBits (NumBits)
+    .InitialCount (InitialCount),
+    .MaxCount     (MaxCount)
   ) counter_inst (
     .clk_i (clk),
     .rst_i (rst),
