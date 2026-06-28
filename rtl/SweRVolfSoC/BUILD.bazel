@@ -1,0 +1,55 @@
+load("@rules_verilog//verilog:defs.bzl", "verilog_library")
+load("@rules_verilator//verilator:defs.bzl", "verilator_cc_library")
+
+verilog_library(
+  name = "swervolf_core",
+  srcs = [
+    "swervolf_core.v",
+  ],
+  deps = [
+    "//rtl/SweRVolfSoC/SweRVEh1CoreComplex:swerv_eh1_core_complex",
+    "//rtl/SweRVolfSoC/Interconnect/AxiInterconnect:axi_interconnect",
+    "//rtl/SweRVolfSoC/Interconnect/WishboneInterconnect:wishbone_interconnect",
+    "//rtl/SweRVolfSoC/BootROM:boot_rom",
+    "//rtl/SweRVolfSoC/Peripherals/SystemController:system_controller",
+    "//rtl/SweRVolfSoC/Peripherals/spi:spi",
+    "//rtl/SweRVolfSoC/Peripherals/uart:uart",
+    "//rtl/SweRVolfSoC/Peripherals/gpio:gpio",
+    "//rtl/SweRVolfSoC/Peripherals/ptc:ptc",
+  ],
+  visibility = ["//visibility:public"],
+)
+
+verilog_library(
+  name = "axi_mem_wrapper",
+  srcs = [
+    "axi_mem_wrapper.v",
+  ],
+  deps = [
+    "//rtl/SweRVolfSoC/Interconnect/AxiToWb:axi_to_wb",
+    "//rtl/memory:memory",
+  ]
+)
+
+verilog_library(
+  name = "rvfpgasim_lib",
+  srcs = [
+    "rvfpgasim.v",
+  ],
+  deps = [
+    ":swervolf_core",
+    "//rtl/OtherSources/dmi:dmi",
+    ":axi_mem_wrapper",
+  ]
+)
+
+verilator_cc_library(
+  name = "sim",
+  module = ":rvfpgasim_lib",
+  module_top = "rvfpgasim",
+  trace = True,
+  timing = True,
+  vopts = [
+    "-Wall",
+  ],
+)

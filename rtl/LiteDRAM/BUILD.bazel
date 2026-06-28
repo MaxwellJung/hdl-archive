@@ -1,0 +1,10 @@
+load("@rules_verilog//verilog:defs.bzl", "verilog_library")
+
+verilog_library(
+  name = "litedram",
+  srcs = glob(["*.v"]),
+  deps = [
+    "//rtl/serv_1.0.2:serv_1.0.2",
+  ],
+  visibility = ["//visibility:public"],
+)

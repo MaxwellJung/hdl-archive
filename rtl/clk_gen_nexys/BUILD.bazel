@@ -1,0 +1,7 @@
+load("@rules_verilog//verilog:defs.bzl", "verilog_library")
+
+verilog_library(
+  name = "clk_gen_nexys",
+  srcs = ["clk_gen_nexys.v"],
+  visibility = ["//visibility:public"],
+)

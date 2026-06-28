@@ -1,0 +1,11 @@
+load("@rules_verilog//verilog:defs.bzl", "verilog_library")
+
+verilog_library(
+  name = "axi_interconnect",
+  srcs = ["axi_intercon.sv"],
+  hdrs = ["axi_intercon.vh"],
+  deps = [
+    "//rtl/pulp_platform/axi_0.25.0:axi_0.25.0",
+  ],
+  visibility = ["//visibility:public"],
+)

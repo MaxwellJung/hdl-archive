@@ -1,0 +1,12 @@
+load("@rules_verilog//verilog:defs.bzl", "verilog_library")
+
+verilog_library(
+  name = "boot_rom",
+  srcs = [
+    "wb_mem_wrapper.v",
+  ],
+  deps = [
+    "//rtl/memory:memory",
+  ],
+  visibility = ["//visibility:public"],
+)

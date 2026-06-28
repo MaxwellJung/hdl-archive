@@ -1,0 +1,11 @@
+load("@rules_verilog//verilog:defs.bzl", "verilog_library")
+
+verilog_library(
+  name = "dmi",
+  srcs = [
+    "dmi_wrapper.v",
+    "rvjtag_tap.sv",
+    "dmi_jtag_to_core_sync.v",
+  ],
+  visibility = ["//visibility:public"],
+)

@@ -1,0 +1,9 @@
+load("@rules_verilog//verilog:defs.bzl", "verilog_library")
+
+verilog_library(
+  name = "memory",
+  srcs = [
+    "dpram64.v",
+  ],
+  visibility = ["//visibility:public"],
+)

@@ -1,0 +1,19 @@
+load("@rules_verilog//verilog:defs.bzl", "verilog_library")
+load("@rules_vivado//vivado:defs.bzl", "vivado_flow")
+
+verilog_library(
+  name = "rvfpganexys_lib",
+  srcs = [
+    "rvfpganexys.sv",
+  ],
+  data = ["rvfpganexys.xdc"],
+  deps = [
+  ]
+)
+
+vivado_flow(
+  name = "rvfpganexys",
+  module = ":rvfpganexys_lib",
+  module_top = "rvfpganexys",
+  part_number = "xc7a100tcsg324-1",
+)
